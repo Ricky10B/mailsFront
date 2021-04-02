@@ -1,0 +1,51 @@
+.accounts-container{
+    background: linear-gradient(50deg, #1FCFFE, #0011DB);
+    height: 100vh;
+    background: linear-gradient(rgba(4, 109, 223, .2), rgba(0, 17, 219, .1)), url("/assets/img/fondoIndex.jpg");
+    background-size: cover;
+    font-family: 'Suez One', serif;
+}
+
+.sendEmail{
+    -webkit-text-fill-color: white;
+    -webkit-text-stroke: 1px #0011DB;
+}
+
+.colorInstagram{
+    background: linear-gradient(4deg, #DBE717, purple, purple, blue);
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+.colorGoogle{
+    background: linear-gradient(1deg, #27C10B, #27C10B, #0C18CA, #0C18CA, #C7CA0C, #C7CA0C, #CA0C0C, #CA0C0C);
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+@keyframes appearanceEffect{
+    0%{
+        opacity: 0;
+        transform: translateY(-250px);
+    }
+    25%{
+        opacity: 0.25;
+        transform: translateY(-150px);
+    }
+    50%{
+        opacity: 0.5;
+        transform: translateY(-100px);
+    }
+    75%{
+        opacity: 0.75;
+        transform: translateY(-50px);
+    }
+    100%{
+        opacity: 1;
+        transform: translateY(0px);
+    }
+}
+
+#modalInformativeRegister > div{
+    animation: appearanceEffect 1.5s linear;
+}

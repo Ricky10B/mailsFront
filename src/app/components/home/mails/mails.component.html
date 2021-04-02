@@ -1,0 +1,30 @@
+<div>
+    <div *ngIf="mails.length == 0; else siMensajes">
+        <div>
+            <h2 class="text-xl text-center">You have not {{ btnSelected === 'sends' ? 'sent' : 'received' }} emails yet</h2>
+        </div>
+    </div>
+    <ng-template #siMensajes>
+        <div *ngFor="let mail of mails">
+            <div class="w-11/12 md:w-full xl:w-10/12 2xl:w-8/12">
+                <div class="bg-gray-400 cursor-pointer rounded-lg py-2 px-4 my-2 hover:opacity-80 focus:outline-none" id="message" stopPropagation routerLink="/mail/show/{{mail.id}}">
+                    <p class="flex justify-between mr-2">
+                        <span>
+                            <i class="text-green-700 fa-lg {{ !mail.leido ? 'fas fa-envelope' : 'fas fa-envelope-open-text' }}"></i>
+                        </span>
+                        {{ mail.fecha | date: 'short' }}
+                        <span>
+                            <i class="fas fa-check-circle fa-lg mx-1"></i>
+                            <i class="fas fa-trash-alt fa-lg mx-1 text-red-700"></i>
+                        </span>
+                    </p>
+                    <p><b>from: </b>{{ mail.userSend }}</p>
+                    <p class="mensaje">
+                        <b>Message: </b>
+                        <span>{{ mail.message }}</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </ng-template>
+</div>    

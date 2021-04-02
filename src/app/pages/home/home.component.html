@@ -1,0 +1,24 @@
+<div class="md:h-screen grid grid-cols-4 sm:grid-cols-12 gap-10">
+    <app-send-mails class="col-start-1 col-end-10 sm:col-end-13 md:col-end-5 p-4 md:p-7 md:border-r-4 border-gray-400 bg-blue-300"></app-send-mails>
+    <div class="col-start-1 col-end-10 ml-10 sm:col-end-13 md:col-start-5 md:col-end-12 md:pt-3 mails">
+        <div class="sm:ml-16">
+            <span class="bg-blue-600 px-3 py-1 text-lg rounded-t-xl rounded-l-xl cursor-pointer hover:bg-blue-800 text-white border-2 border-gray-400" (click)="sendsMails()">
+                Sent
+            </span>
+            <span class="bg-blue-300 px-3 py-1 text-lg rounded-t-xl rounded-l-xl cursor-pointer hover:bg-blue-800 -m-1" (click)="receivedMails()">
+                Received
+            </span>
+            <span class="bg-blue-300 px-3 py-1 text-lg rounded-t-xl rounded-l-xl cursor-pointer hover:bg-blue-800 -m-1" (click)="logout()">
+                Logout
+            </span>
+        </div>
+        <div class="mt-4" id="mailsContainer">
+            <div *ngIf="charge">
+                <app-spinner></app-spinner>
+            </div>
+            <div *ngIf="!charge">
+                <app-mails [btnSelected]="btnMailsSelected" [mails]="mails" [charge]=charge></app-mails>
+            </div>
+        </div>
+    </div>
+</div>

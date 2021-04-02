@@ -1,0 +1,30 @@
+<p class="text-lg">Send emails to your friends</p>
+<form [formGroup]="mailForms">
+    <div>
+        <input type="email" name="email" formControlName="email" class="w-full my-2 px-2 py-1 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-900 focus:border-transparent" placeholder="Recipient's Email" required autofocus [value]="userSent">
+    </div>
+    <div *ngIf="mailForms.controls['email'].invalid && mailForms.controls['email'].dirty && mailForms.controls['email'].touched">
+        <div *ngIf="mailForms.controls['email'].errors.required" class="bg-red-500 hover:bg-red-600 text-black text-lg pl-3 my-2 rounded-md">
+            The Email is required
+        </div>
+        <div *ngIf="mailForms.controls['email'].errors.email" class="bg-red-500 hover:bg-red-600 text-black text-lg pl-3 my-2 rounded-md">
+            The Email is invalid
+        </div>
+    </div>
+    <div>
+        <textarea rows="5" name="message" formControlName="message" class="w-full my-2 px-2 py-1 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-900 focus:border-transparent" placeholder="message to Recipient" required></textarea>
+    </div>
+    <div *ngIf="mailForms.controls['message'].invalid && mailForms.controls['message'].dirty && mailForms.controls['message'].touched">
+        <div *ngIf="mailForms.controls['message'].errors.required" class="bg-red-500 hover:bg-red-600 text-black text-lg pl-3 my-2 rounded-md">
+            The Message is required
+        </div>
+    </div>
+    <div class="text-right">
+        <button type="submit" [disabled]="mailForms.invalid" 
+            class="px-4 py-1 text-xl mr-1 rounded-lg" 
+            [ngClass]="{ 'bg-blue-600 text-white hover:bg-blue-900 hover:text-white focus:outline-none': mailForms.valid, 'bg-gray-500 cursor-default': mailForms.invalid }"
+            (click)="sendMail()">
+            Send
+        </button>
+    </div>
+</form>

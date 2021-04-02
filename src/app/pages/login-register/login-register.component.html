@@ -1,0 +1,185 @@
+<div class="accounts-container text-white">
+    <div class="relative z-20 bg-indigo-800 block md:hidden">
+        <p class="text-6xl font-black ml-4 inline-block cursor-pointer" id="logoBarra" (click)="showNavbar()">&equiv;</p>
+    </div>
+    <div class="flex-col text-center bg-gray-300 transform -translate-y-40 transition duration-1000 ease-linear md:text-white text-gray-900 md:flex md:flex-row md:bg-transparent md:translate-y-0" id="navbar">
+        <ul class="flex justify-center md:mt-3 ml-0 md:ml-5 md:justify-start">
+            <li class="ml-2 mr-1 cursor-pointer">
+                <img src="/assets/img/sendEmail.png" width="52px" alt="Image the send emails">
+            </li>
+            <li class="m-2 cursor-pointer">
+                <p class="sendEmail text-3xl">SendMails</p>
+            </li>
+        </ul>
+        <hr class="block md:hidden">
+        <ul class="flex flex-col ml-2 mt-0 md:mt-4 mr-0 md:mr-12 md:ml-auto md:flex-row">
+            <li class="text-2xl my-2 mx-3 cursor-pointer" (click)="login()">Login</li>
+            <hr class="block md:hidden">
+            <li class="text-2xl my-2 mx-3 cursor-pointer" (click)="register()">Register</li>
+        </ul>
+    </div>
+</div>
+
+<div id="Access-Accounts">
+    <div class="z-10 absolute h-full inset-0 hidden bg-black bg-opacity-80 flex justify-center items-center">
+        <div class="bg-blue-400 rounded-lg p-6 w-8/12 sm:w-6/12 md:w-4/12 lg:w-4/12 xl:w-3/12 2xl:w-2/12">
+            <div class="flex items-center">
+                <i class="far fa-user-circle fa-2x"></i>
+                <i class="far fa-times-circle fa-2x ml-auto cursor-pointer" (click)="closeLogin()"></i>
+            </div>
+            <h3 class="text-3xl text-center mb-2 Login">Login</h3>
+            <form [formGroup]="formLogin">
+                <div class="my-2 relative">
+                    <i class="fas fa-envelope absolute bottom-2 left-1"></i>
+                    <input type="email" name="email" formControlName="email" class="w-full rounded-md px-2 py-1 focus:outline-none focus:ring-2 focus:ring-blue-900 focus:border-transparent pl-6" placeholder="Enter your email" required autofocus>
+                </div>
+                <div *ngIf="formLogin.controls['email'].invalid && formLogin.controls['email'].dirty">
+                    <div *ngIf="formLogin.controls['email'].errors.required" class="bg-red-500 hover:bg-red-600 text-black text-lg pl-3 my-2 rounded-md">
+                        The Email is required
+                    </div>
+                    <div *ngIf="formLogin.controls['email'].errors.email" class="bg-red-500 hover:bg-red-600 text-black text-lg pl-3 my-2 rounded-md">
+                        The mail format is wrong
+                    </div>
+                </div>
+                <div class="my-2 relative">
+                    <i class="fas fa-lock absolute bottom-2 left-1"></i>
+                    <input type="password" name="password" formControlName="password" class="w-full rounded-md px-2 py-1 focus:outline-none focus:ring-2 focus:ring-blue-900 focus:border-transparent pl-6" placeholder="Enter your password" required>
+                </div>
+                <div *ngIf="formLogin.controls['password'].invalid && formLogin.controls['password'].dirty">
+                    <div *ngIf="formLogin.controls['password'].errors.required" class="bg-red-500 hover:bg-red-600 text-black text-lg pl-3 my-2 rounded-md">
+                        The Password is required
+                    </div>
+                    <div *ngIf="formLogin.controls['password'].errors.minlength" class="bg-red-500 hover:bg-red-600 text-black text-lg pl-3 my-2 rounded-md">
+                        The Password must be at least 6 characters
+                    </div>
+                </div>
+                <div class="mt-2 text-center">
+                    <div *ngIf="formLogin.invalid; else valido">
+                        <button disabled class="bg-gray-700 text-lg text-gray-300 w-full py-1 rounded-lg focus:outline-none cursor-default">Login</button>
+                    </div>
+                    <ng-template #valido>
+                        <button (click)="LoginAccount()" class="bg-blue-800 text-lg hover:bg-blue-600 text-gray-200 w-full py-1 rounded-lg focus:outline-none ">Login</button>
+                    </ng-template>
+                </div>
+            </form>
+            <div class="loginsApis flex justify-center my-4 bg-blue-100 rounded-md">
+                <i class="fab fa-facebook fa-3x text-blue-900 cursor-pointer mx-1"></i>
+                <i class="fab fa-instagram-square fa-3x colorInstagram cursor-pointer mx-1"></i>
+                <img class="cursor-pointer mx-1" src="https://assets.stickpng.com/thumbs/5847f9cbcef1014c0b5e48c8.png" width="45px" alt="logo google">
+                <i class="fab fa-twitter-square fa-3x text-blue-600 cursor-pointer mx-1"></i>
+            </div>
+            <p class="text-base text-black">Do not you have account yet? <a class="cursor-pointer text-black hover:text-gray-800" (click)="register()">Register here</a></p>
+        </div>
+    </div>
+
+    <div class="z-10 absolute h-full inset-0 hidden bg-black bg-opacity-80 flex justify-center items-center">
+        <div class="bg-blue-400 rounded-lg p-6 w-8/12 sm:w-6/12 md:w-4/12 lg:w-4/12 xl:w-3/12 2xl:w-2/12">
+            <div class="flex items-center">
+                <i class="far fa-user-circle fa-2x"></i>
+                <i class="far fa-times-circle fa-2x ml-auto cursor-pointer" (click)="closeRegister()"></i>
+            </div>
+            <h3 class="text-3xl text-center mb-2 Register">Register</h3>
+            <form [formGroup]="formRegister">
+                <div class="my-2 relative">
+                    <i class="fas fa-user absolute bottom-2 left-1"></i>
+                    <input type="text" name="name" formControlName="name" class="w-full rounded-md px-2 py-1 focus:outline-none focus:ring-2 focus:ring-blue-900 focus:border-transparent pl-6" placeholder="Enter your name" required autofocus autocomplete="on">
+                </div>
+                <div *ngIf="formRegister.controls['name'].invalid && formRegister.controls['name'].dirty">
+                    <div *ngIf="formRegister.controls['name'].errors.required" class="bg-red-500 hover:bg-red-600 text-black text-lg pl-3 my-2 rounded-md">
+                        The Name is required
+                    </div>
+                    <div *ngIf="formRegister.controls['name'].errors.minlength" class="bg-red-500 hover:bg-red-600 text-black text-lg pl-3 my-2 rounded-md">
+                        The Name must be at least 4 characters
+                    </div>
+                </div>
+                <div class="my-2 relative">
+                    <i class="fas fa-user absolute bottom-2 left-1"></i>
+                    <input type="text" name="surname" formControlName="surname" class="w-full rounded-md px-2 py-1 focus:outline-none focus:ring-2 focus:ring-blue-900 focus:border-transparent pl-6" placeholder="Enter your surname" required autocomplete="on">
+                </div>
+                <div *ngIf="formRegister.controls['surname'].invalid && formRegister.controls['surname'].dirty">
+                    <div *ngIf="formRegister.controls['surname'].errors.required" class="bg-red-500 hover:bg-red-600 text-black text-lg pl-3 my-2 rounded-md">
+                        The Surname is required
+                    </div>
+                    <div *ngIf="formRegister.controls['surname'].errors.minlength" class="bg-red-500 hover:bg-red-600 text-black text-lg pl-3 my-2 rounded-md">
+                        The Surname must be at least 3 characters
+                    </div>
+                </div>
+                <div class="my-2 relative">
+                    <i class="fas fa-sort-numeric-up-alt absolute bottom-2 left-1"></i>
+                    <input type="number" name="age" formControlName="age" class="w-full rounded-md px-2 py-1 focus:outline-none focus:ring-2 focus:ring-blue-900 focus:border-transparent pl-6" placeholder="Enter your age" required autocomplete="on">
+                </div>
+                <div *ngIf="formRegister.controls['age'].invalid && formRegister.controls['age'].dirty">
+                    <div *ngIf="formRegister.controls['age'].errors.required" class="bg-red-500 hover:bg-red-600 text-black text-lg pl-3 my-2 rounded-md">
+                        Age is required
+                    </div>
+                    <div *ngIf="formRegister.controls['age'].errors.pattern" class="bg-red-500 hover:bg-red-600 text-black text-lg pl-3 my-2 rounded-md">
+                        Age must be over 9
+                    </div>
+                </div>
+                <div class="my-2 relative">
+                    <i class="fas fa-envelope absolute bottom-2 left-1"></i>
+                    <input type="email" name="email" formControlName="email" class="w-full rounded-md px-2 py-1 focus:outline-none focus:ring-2 focus:ring-blue-900 focus:border-transparent pl-6" placeholder="Enter your email" required autocomplete="on">
+                </div>
+                <div *ngIf="formRegister.controls['email'].invalid && formRegister.controls['email'].dirty">
+                    <div *ngIf="formRegister.controls['email'].errors.required" class="bg-red-500 hover:bg-red-600 text-black text-lg pl-3 my-2 rounded-md">
+                        Email is required
+                    </div>
+                    <div *ngIf="formRegister.controls['email'].errors.email" class="bg-red-500 hover:bg-red-600 text-black text-lg pl-3 my-2 rounded-md">
+                        The mail format is wrong
+                    </div>
+                </div>
+                <div class="my-2 relative">
+                    <i class="fas fa-lock absolute bottom-2 left-1"></i>
+                    <input type="password" name="password" formControlName="password" class="w-full rounded-md px-2 py-1 focus:outline-none focus:ring-2 focus:ring-blue-900 focus:border-transparent pl-6" placeholder="Enter your password" required>
+                </div>
+                <div *ngIf="formRegister.controls['password'].invalid && formRegister.controls['password'].dirty">
+                    <div *ngIf="formRegister.controls['password'].errors.required" class="bg-red-500 hover:bg-red-600 text-black text-lg pl-3 my-2 rounded-md">
+                        Password is required
+                    </div>
+                    <div *ngIf="formRegister.controls['password'].errors.minlength" class="bg-red-500 hover:bg-red-600 text-black text-lg pl-3 my-2 rounded-md">
+                        Password must be at least 6 characters
+                    </div>
+                </div>
+                <div class="my-2 relative">
+                    <i class="fas fa-lock absolute bottom-2 left-1"></i>
+                    <input type="password" name="confirmPassword" formControlName="confirmPassword" class="w-full rounded-md px-2 py-1 focus:outline-none focus:ring-2 focus:ring-blue-900 focus:border-transparent pl-6" placeholder="Confirm your password" required>
+                    <div *ngIf="formRegister.controls['confirmPassword'].invalid && formRegister.controls['confirmPassword'].dirty">
+                        <div *ngIf="formRegister.controls['confirmPassword'].errors.required" class="bg-red-500 hover:bg-red-600 text-black text-lg pl-3 my-2 rounded-md">
+                            Confirm Password is required
+                        </div>
+                        <div *ngIf="formRegister.controls['confirmPassword'].errors.minlength" class="bg-red-500 hover:bg-red-600 text-black text-lg pl-3 my-2 rounded-md">
+                            Confirm Password must be at least 6 characters
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-2 text-center">
+                    <div *ngIf="formRegister.invalid; else valido">
+                        <button disabled class="bg-gray-700 text-lg text-gray-300 w-full rounded-lg py-1 focus:outline-none cursor-default">Register</button>
+                    </div>
+                    <ng-template #valido>
+                        <button (click)="RegisterAccount()" class="bg-blue-800 hover:bg-blue-600 text-lg text-gray-200 w-full rounded-lg py-1 focus:outline-none">Register</button>
+                    </ng-template>
+                </div>
+            </form>
+            <p class="text-black text-base">Do you already have an account? <a class="text-black hover:text-gray-800 cursor-pointer" (click)="login()">Login here</a></p>
+        </div>
+    </div>
+</div>
+
+<div class="hidden absolute inset-0 h-full flex justify-center align-middle items-center bg-black bg-opacity-80" id="modalInformativeRegister">
+    <div class="bg-blue-900 w-8/12 sm:w-6/12 md:w-4/12 lg:w-3/12 xl:w-2/12 px-8 py-6 rounded-lg">
+        <h2 class="text-gray-200 text-xl text-center">
+            We have sent you an email, you can review it and finish with your registration
+            <br>
+            <p class="text-center">
+                <i class="fas fa-envelope fa-3x text-blue-200"></i>
+            </p>
+        </h2>
+        <div class="text-center">
+            <button (click)="closeModal()" class="bg-green-600 rounded-xl w-8/12 py-2 text-xl font-bold items-center border-solid border-2 border-green-900 hover:bg-green-900 hover:text-gray-300  hover:border-green-600 focus:outline-none focus:bg-green-300 focus:text-black">
+                Agree
+                <i class="fas fa-check-circle fa-xl"></i>
+            </button>
+        </div>
+    </div>
+</div>
